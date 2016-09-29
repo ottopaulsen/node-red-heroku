@@ -1,0 +1,129 @@
+[
+    {
+        "id": "b2757629.9a08f8",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "1183f03b.fae04",
+        "type": "mqtt-broker",
+        "z": "b2757629.9a08f8",
+        "broker": "m20.cloudmqtt.com",
+        "port": "15555",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "aa691bac.527198",
+        "type": "mqtt in",
+        "z": "b2757629.9a08f8",
+        "name": "Smoky data",
+        "topic": "smoky/1/#",
+        "qos": "1",
+        "broker": "1183f03b.fae04",
+        "x": 138.5,
+        "y": 94,
+        "wires": [
+            [
+                "d56617a5.79e518",
+                "31caee29.3735e2"
+            ]
+        ]
+    },
+    {
+        "id": "d56617a5.79e518",
+        "type": "thingspeak42",
+        "z": "b2757629.9a08f8",
+        "name": "ThingSpeak",
+        "delay": "30",
+        "topic1": "smoky/1/inside/temperature",
+        "topic2": "smoky/1/inside/humidity",
+        "topic3": "smoky/1/inside/smoke",
+        "topic4": "smoky/1/inside/heater",
+        "topic5": "smoky/1/outside/temperature",
+        "topic6": "smoky/1/outside/humidity",
+        "topic7": "",
+        "topic8": "",
+        "endpoint": "https://thingspeak.com",
+        "x": 506.5,
+        "y": 106,
+        "wires": []
+    },
+    {
+        "id": "799bad78.ba3d64",
+        "type": "mqtt out",
+        "z": "b2757629.9a08f8",
+        "name": "Smoky ack",
+        "topic": "smoky/1/ack",
+        "qos": "1",
+        "retain": "",
+        "broker": "1183f03b.fae04",
+        "x": 569.5,
+        "y": 193,
+        "wires": []
+    },
+    {
+        "id": "84c44ff5.42f45",
+        "type": "mqtt in",
+        "z": "b2757629.9a08f8",
+        "name": "Smoky temp",
+        "topic": "smoky/1/inside/temperature",
+        "qos": "1",
+        "broker": "1183f03b.fae04",
+        "x": 143.5,
+        "y": 194,
+        "wires": [
+            [
+                "9a6c5dd8.47c67"
+            ]
+        ]
+    },
+    {
+        "id": "9a6c5dd8.47c67",
+        "type": "change",
+        "z": "b2757629.9a08f8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 353.5,
+        "y": 194,
+        "wires": [
+            [
+                "799bad78.ba3d64"
+            ]
+        ]
+    },
+    {
+        "id": "31caee29.3735e2",
+        "type": "debug",
+        "z": "b2757629.9a08f8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 451.5,
+        "y": 48,
+        "wires": []
+    }
+]

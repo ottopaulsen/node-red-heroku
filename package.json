@@ -1,0 +1,26 @@
+{
+  "name": "node-red-otto",
+  "version": "0.0.1",
+  "description": "Run Node-RED on Heroku",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "scripts": {
+    "start": "node-red --settings ./.node-red/settings.js --userDir ./.node-red"
+  },
+  "dependencies": {
+    "node-red": "*",
+    "node-red-admin": "*",
+    "node-red-contrib-thingspeak42":"*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ottopaulsen/node-red-otto"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "node-red"
+  ],
+  "license": ""
+}

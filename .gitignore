@@ -3,6 +3,8 @@
 *.backup
 .sessions.json
 flows_cred.json
+heroku_config_var_setup.sh
+local_config_var_setup.sh
 
 # Logs
 logs

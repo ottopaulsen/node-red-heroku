@@ -2,15 +2,8 @@
 
 Here are some hints on how to get [Node-RED](http://nodered.org/) running on [Heroku](http://heroku.com). I am not sure all instructions are complete, or in the correct order, because I have done it all over some time, but I will try to get in the most tricky stuff.
 
-I don't thing I will be using this solution myself, because of the issue described in the warning below, but figuring out how to get it working was worth spending some time on documentation.
+Running Node-RED on Heroku is an alternative to running it on your own hardware. There are advantages and drawbacks with both alternatives.
 
-### WARNING!
-
-There is one drawback with running Node-RED on Heroku. In order to work, Node-RED must be running all the time. That requires "dyno" time, so this app alone may tak up all your free dyno time. Of course, you can buy more time to get rid of the problem.
-
-If you are using free dynos at Heroke, since Node-RED is running in the background, you will need some other tool pingning it every 30 minutes to keep it awake. If you use paied dynos, I think you avoid this problem, but I am not sure. I have not set up this yet.
-
-There may be other ways to solve this, but I haven't found them yet. Please let me know if you do.
 
 
 ## Introduction
@@ -37,48 +30,55 @@ Make sure you have all you need (see above). Then
 
 * Install Node-RED
 * Configure Node-RED and get it working locally
+* Set up .gitignore
 * Set up Heroku
 * Deploy to Heroku
-* Set up .gitignore
 
 The Node-RED [installation guide](http://nodered.org/docs/getting-started/installation.html) explains installing Node-RED locally perfectly, so I will not repeat that.
 
 ### Configure Node-RED
 
-Create a .node-red directory. Copy the original [settings.js](https://github.com/node-red/node-red/blob/master/settings.js) file here. 
-
-You need the settings.js file to configure Node-RED. Take a special look at the adminAuth setting. This is necessary if you are going to use the node editor. 
+Create a separate directory for the app, where you put everything here. Create a .node-red sub-directory. Copy the original [settings.js](https://github.com/node-red/node-red/blob/master/settings.js) file here. You need the settings.js file to configure Node-RED. Take a special look at the `adminAuth` setting. This is necessary if you are going to use the node editor. Read about [Security](http://nodered.org/docs/security) in the Node-RED doc.
 
 Use the `disableEditor: false` setting to enable (false) or disable (true) the editor.
 
-You can run Node-RED locally to cretae flows, using this command:
+You can run Node-RED locally to create flows, using this command:
 ```
 node-red --settings ./.node-red/settings.js --userDir ./.node-red 
 ```
 After installing Heroku, you can start a local app using the command `heroku local web`.
 
-When you create flows, it will be stored in a flows.json file .node-red directory. Credentials will be stored in a flows_cred.json file. To keep the credentials safe, keep them in environment variables:
+When you create flows, it will be stored in a `flows.json` file `.node-red` directory. Credentials will be stored in a `flows_cred.json` file. 
+
+#### Keep your credentials secret
+
+To keep the credentials safe, move them out of the `flows_cred.json` file and in to environment variables. Examples:
 ```
 MQTT_USER=<MQTT username>
 MQTT_PASSWORD=<MQTT password>
 THINGSPEAK_API_KEY=<ThingSpeak API key>
 ```
 
-You may create a shell script file to set them locally, and another one to set them on Heroku. To set locally, use
-```
-export MQTT_PASSWORD=secret
-```
-To run such a shell script, remember to run it like this: `. set_local_env.sh` The preceeding dot is important.
+You may create a shell script file to set them locally, and another one to set them on Heroku. 
 
-### Set up Heroku
-
-To set environment variables on Heroku, use the Heroku toolbelt like this:
+For example, to set up local variables, create the script `local_config_var_setup.sh`:
 ```
+export MQTT_USER=secret
+export MQTT_PASSWORD=anothersecret
+export THINGSPEAK_API_KEY=secretsecret
+```
+Run this script like this: `. local_config_var_setup.sh` The preceeding dot is important.
+
+To set up variables on Heroku, create the script `heroku_config_var_setup.sh`:
+```
+heroku config:set MQTT_USER=secret
+heroku config:set MQTT_PASSWORD=anothersecret
 heroku config:set THINGSPEAK_API_KEY=anothersecret
-```
-Remember to set all your credentials this way.
 
-In order to keep the credentials seecret, we can dynamically create the flows_cred.json file with a postinstall script. Example:
+```
+Run this script after you have configured Heroku (see below), like this: `heroku_config_var_setup.sh`.
+
+After creating scripts with your environment variables, move the content in the `flows_cred.json` file into another script name `postinstall.sh`. Example:
 
 ```
 # Create the flows_cred.json file with credentials from environment variables
@@ -97,13 +97,33 @@ cat > $FLOWS_CRED_FILE << EOF
 EOF
 ```
 
-The code between the two EOFs you copy from your flows_cred.json file (in your local .node-red directory). Just replace the secrets with environment variables.
+The code between the two EOFs is the content from your flows_cred.json file (in your local .node-red directory), but with the secrets replaced with environment variables.
 
-You may create two more scripts to set the environment variables. One local and one for Heroku. Or find a smarter way to do this.
 
-You can follow the instructions on Heroku to create the Heroku app, but before you do that, you should update yout .gitignore file to keep your seecrets out of git. See below.
 
-See the code to get examples of 
+#### Keeping the Heroku-app awake
+
+There is one drawback with running Node-RED on Heroku. In order to work, Node-RED must be running all the time. That requires "dyno" time, so this app alone may tak up all your free dyno time. Of course, you can buy more time to get rid of the problem.
+
+If you are using free dynos at Heroku, since Node-RED is running in the background, you will need some tool pingning it every 30 minutes to keep it awake. I am not sure if this is necessary if you use paied dynos. Anyway, a simple solution is to have Node-RED send an HTTP request to itself every 15 minutes. I found no way of starting a flow in a loop, so I wait for a "keepalive" message on MQTT, send the HTTP-request, wait 15 minutes, then send a new keepalive message to MQTT. It seems to work. Probably there are simpler ways to do this in Node-RED. Please let me know if you know about one.
+
+
+
+### Set up Heroku
+
+You can follow the [instructions on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction) to create the Heroku app, but before you do that, make sure you update your .gitignore file to keep your seecrets out of git. Example:
+
+```
+*.backup
+.sessions.json
+flows_cred.json
+heroku_config_var_setup.sh
+local_config_var_setup.sh
+```
+
+The `flows_cred.json` file will be created dynamically by the `postinstall.sh` script. The shell-scripts are those that keep your secrets.
+
+For other configurations, see the code to get examples of 
 
 * app.json
 * package.json
@@ -113,16 +133,7 @@ See the code to get examples of
 
 The Procfile is used to start the app on Heroku. 
 
-### Set up .gitignore
 
-Make sure you keep all your seecrets out of git, as well as other ignorable files. Example:
-```
-*.backup
-.sessions.json
-flows_cred.json
-heroku_config_var_setup.sh
-local_config_var_setup.sh
-```
 
 
 

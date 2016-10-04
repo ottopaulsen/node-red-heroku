@@ -1,28 +1,5 @@
 [
     {
-        "id": "b2757629.9a08f8",
-        "type": "tab",
-        "label": "Flow 1"
-    },
-    {
-        "id": "1183f03b.fae04",
-        "type": "mqtt-broker",
-        "z": "b2757629.9a08f8",
-        "broker": "m20.cloudmqtt.com",
-        "port": "15555",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": true,
-        "keepalive": "60",
-        "cleansession": true,
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": "",
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": ""
-    },
-    {
         "id": "aa691bac.527198",
         "type": "mqtt in",
         "z": "b2757629.9a08f8",
@@ -119,7 +96,7 @@
         "type": "debug",
         "z": "b2757629.9a08f8",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "false",
         "x": 451.5,
@@ -140,11 +117,11 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 711,
-        "y": 354,
+        "x": 376,
+        "y": 423,
         "wires": [
             [
-                "465f6362.097ecc"
+                "8a7cd98a.8537d8"
             ]
         ]
     },
@@ -160,7 +137,8 @@
         "y": 346,
         "wires": [
             [
-                "2808a205.6667ce"
+                "2808a205.6667ce",
+                "48717b39.480254"
             ]
         ]
     },
@@ -173,39 +151,55 @@
         "ret": "txt",
         "url": "https://node-red-otto.herokuapp.com/",
         "tls": "",
-        "x": 421,
-        "y": 350,
+        "x": 399,
+        "y": 337,
         "wires": [
             [
-                "48717b39.480254"
+                "72489b47.2dc5a4"
             ]
         ]
     },
     {
-        "id": "465f6362.097ecc",
-        "type": "change",
+        "id": "8a7cd98a.8537d8",
+        "type": "mqtt out",
         "z": "b2757629.9a08f8",
-        "name": "Empty msg",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": " ",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 564,
-        "y": 458,
-        "wires": [
-            [
-                "2808a205.6667ce"
-            ]
-        ]
+        "name": "Send keepalive",
+        "topic": "keepalive",
+        "qos": "1",
+        "retain": "false",
+        "broker": "1183f03b.fae04",
+        "x": 676,
+        "y": 430,
+        "wires": []
+    },
+    {
+        "id": "72489b47.2dc5a4",
+        "type": "debug",
+        "z": "b2757629.9a08f8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 712,
+        "y": 317,
+        "wires": []
+    },
+    {
+        "id": "1183f03b.fae04",
+        "type": "mqtt-broker",
+        "z": "b2757629.9a08f8",
+        "broker": "m20.cloudmqtt.com",
+        "port": "15555",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
     }
 ]

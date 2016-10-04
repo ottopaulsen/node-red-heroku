@@ -68,7 +68,7 @@ You may create a shell script file to set them locally, and another one to set t
 ```
 export MQTT_PASSWORD=secret
 ```
-
+To run such a shell script, remember to run it like this: `. set_local_env.sh` The preceeding dot is important.
 
 ### Set up Heroku
 

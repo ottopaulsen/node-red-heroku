@@ -125,5 +125,87 @@
         "x": 451.5,
         "y": 48,
         "wires": []
+    },
+    {
+        "id": "48717b39.480254",
+        "type": "delay",
+        "z": "b2757629.9a08f8",
+        "name": "Wait 15 minutes",
+        "pauseType": "delay",
+        "timeout": "15",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 711,
+        "y": 354,
+        "wires": [
+            [
+                "465f6362.097ecc"
+            ]
+        ]
+    },
+    {
+        "id": "71ae1fe1.6f8e8",
+        "type": "mqtt in",
+        "z": "b2757629.9a08f8",
+        "name": "keepalive",
+        "topic": "keepalive",
+        "qos": "1",
+        "broker": "1183f03b.fae04",
+        "x": 162,
+        "y": 346,
+        "wires": [
+            [
+                "2808a205.6667ce"
+            ]
+        ]
+    },
+    {
+        "id": "2808a205.6667ce",
+        "type": "http request",
+        "z": "b2757629.9a08f8",
+        "name": "Call Node-RED Heroku",
+        "method": "GET",
+        "ret": "txt",
+        "url": "https://node-red-otto.herokuapp.com/",
+        "tls": "",
+        "x": 421,
+        "y": 350,
+        "wires": [
+            [
+                "48717b39.480254"
+            ]
+        ]
+    },
+    {
+        "id": "465f6362.097ecc",
+        "type": "change",
+        "z": "b2757629.9a08f8",
+        "name": "Empty msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": " ",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 564,
+        "y": 458,
+        "wires": [
+            [
+                "2808a205.6667ce"
+            ]
+        ]
     }
 ]

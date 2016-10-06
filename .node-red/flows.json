@@ -1,31 +1,8 @@
 [
     {
-        "id": "b2757629.9a08f8",
-        "type": "tab",
-        "label": "Flow 1"
-    },
-    {
-        "id": "1183f03b.fae04",
-        "type": "mqtt-broker",
-        "z": "b2757629.9a08f8",
-        "broker": "m20.cloudmqtt.com",
-        "port": "15555",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": true,
-        "keepalive": "60",
-        "cleansession": true,
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": "",
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": ""
-    },
-    {
         "id": "aa691bac.527198",
         "type": "mqtt in",
-        "z": "b2757629.9a08f8",
+        "z": "aaf60450.6229d8",
         "name": "Smoky data",
         "topic": "smoky/1/#",
         "qos": "1",
@@ -42,7 +19,7 @@
     {
         "id": "d56617a5.79e518",
         "type": "thingspeak42",
-        "z": "b2757629.9a08f8",
+        "z": "aaf60450.6229d8",
         "name": "ThingSpeak",
         "delay": "30",
         "topic1": "smoky/1/inside/temperature",
@@ -61,7 +38,7 @@
     {
         "id": "799bad78.ba3d64",
         "type": "mqtt out",
-        "z": "b2757629.9a08f8",
+        "z": "aaf60450.6229d8",
         "name": "Smoky ack",
         "topic": "smoky/1/ack",
         "qos": "1",
@@ -74,7 +51,7 @@
     {
         "id": "84c44ff5.42f45",
         "type": "mqtt in",
-        "z": "b2757629.9a08f8",
+        "z": "aaf60450.6229d8",
         "name": "Smoky temp",
         "topic": "smoky/1/inside/temperature",
         "qos": "1",
@@ -83,15 +60,16 @@
         "y": 194,
         "wires": [
             [
-                "9a6c5dd8.47c67"
+                "9a6c5dd8.47c67",
+                "18b193c9.4bae4c"
             ]
         ]
     },
     {
         "id": "9a6c5dd8.47c67",
         "type": "change",
-        "z": "b2757629.9a08f8",
-        "name": "",
+        "z": "aaf60450.6229d8",
+        "name": "Clear msg",
         "rules": [
             {
                 "t": "set",
@@ -106,7 +84,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 353.5,
+        "x": 343.5,
         "y": 194,
         "wires": [
             [
@@ -117,13 +95,109 @@
     {
         "id": "31caee29.3735e2",
         "type": "debug",
-        "z": "b2757629.9a08f8",
+        "z": "aaf60450.6229d8",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "false",
         "x": 451.5,
         "y": 48,
         "wires": []
+    },
+    {
+        "id": "2808a205.6667ce",
+        "type": "http request",
+        "z": "aaf60450.6229d8",
+        "name": "Call Node-RED Heroku",
+        "method": "GET",
+        "ret": "txt",
+        "url": "https://node-red-otto.herokuapp.com/",
+        "tls": "",
+        "x": 610,
+        "y": 299,
+        "wires": [
+            [
+                "72489b47.2dc5a4"
+            ]
+        ]
+    },
+    {
+        "id": "72489b47.2dc5a4",
+        "type": "debug",
+        "z": "aaf60450.6229d8",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 652,
+        "y": 382,
+        "wires": []
+    },
+    {
+        "id": "18b193c9.4bae4c",
+        "type": "delay",
+        "z": "aaf60450.6229d8",
+        "name": "Keep alive",
+        "pauseType": "timed",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "4",
+        "rateUnits": "hour",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 173.5,
+        "y": 300,
+        "wires": [
+            [
+                "75585b3.9cc97a4"
+            ]
+        ]
+    },
+    {
+        "id": "75585b3.9cc97a4",
+        "type": "change",
+        "z": "aaf60450.6229d8",
+        "name": "Clear msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 354,
+        "y": 298,
+        "wires": [
+            [
+                "2808a205.6667ce"
+            ]
+        ]
+    },
+    {
+        "id": "1183f03b.fae04",
+        "type": "mqtt-broker",
+        "z": "b2757629.9a08f8",
+        "broker": "m20.cloudmqtt.com",
+        "port": "15555",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
     }
 ]

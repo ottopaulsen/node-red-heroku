@@ -130,7 +130,7 @@ module.exports = {
     // The following property can be used to disable the editor. The admin API
     // is not affected by this option. To disable both the editor and the admin
     // API, use either the httpRoot or httpAdminRoot properties
-    disableEditor: true,
+    disableEditor: false,
 
     // The following property can be used to configure cross-origin resource sharing
     // in the HTTP nodes.

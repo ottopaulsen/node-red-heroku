@@ -1,8 +1,49 @@
 [
     {
+        "id": "ed40b49a.4eee78",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "1183f03b.fae04",
+        "type": "mqtt-broker",
+        "z": "b2757629.9a08f8",
+        "broker": "m20.cloudmqtt.com",
+        "port": "15555",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "d11b744b.bc4f38",
+        "type": "mqtt-broker",
+        "z": "ed40b49a.4eee78",
+        "broker": "m20.cloudmqtt.com",
+        "port": "15555",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
         "id": "aa691bac.527198",
         "type": "mqtt in",
-        "z": "aaf60450.6229d8",
+        "z": "ed40b49a.4eee78",
         "name": "Smoky data",
         "topic": "smoky/1/#",
         "qos": "1",
@@ -19,17 +60,17 @@
     {
         "id": "d56617a5.79e518",
         "type": "thingspeak42",
-        "z": "aaf60450.6229d8",
+        "z": "ed40b49a.4eee78",
         "name": "ThingSpeak",
         "delay": "30",
         "topic1": "smoky/1/inside/temperature",
         "topic2": "smoky/1/inside/humidity",
-        "topic3": "smoky/1/inside/heater",
+        "topic3": "smoky/1/inside/heaterpercent",
         "topic4": "smoky/1/inside/smoke",
         "topic5": "smoky/1/outside/temperature",
         "topic6": "smoky/1/outside/humidity",
-        "topic7": "",
-        "topic8": "",
+        "topic7": "smoky/1/inside/heateroutput",
+        "topic8": "smoky/1/dhtreadfailures",
         "endpoint": "https://thingspeak.com",
         "x": 506.5,
         "y": 106,
@@ -38,12 +79,12 @@
     {
         "id": "799bad78.ba3d64",
         "type": "mqtt out",
-        "z": "aaf60450.6229d8",
+        "z": "ed40b49a.4eee78",
         "name": "Smoky ack",
-        "topic": "smoky/1/ack",
+        "topic": "smoky/1/in/ack",
         "qos": "1",
         "retain": "",
-        "broker": "1183f03b.fae04",
+        "broker": "d11b744b.bc4f38",
         "x": 569.5,
         "y": 193,
         "wires": []
@@ -51,7 +92,7 @@
     {
         "id": "84c44ff5.42f45",
         "type": "mqtt in",
-        "z": "aaf60450.6229d8",
+        "z": "ed40b49a.4eee78",
         "name": "Smoky temp",
         "topic": "smoky/1/inside/temperature",
         "qos": "1",
@@ -68,7 +109,7 @@
     {
         "id": "9a6c5dd8.47c67",
         "type": "change",
-        "z": "aaf60450.6229d8",
+        "z": "ed40b49a.4eee78",
         "name": "Clear msg",
         "rules": [
             {
@@ -95,7 +136,7 @@
     {
         "id": "31caee29.3735e2",
         "type": "debug",
-        "z": "aaf60450.6229d8",
+        "z": "ed40b49a.4eee78",
         "name": "",
         "active": false,
         "console": "false",
@@ -107,7 +148,7 @@
     {
         "id": "2808a205.6667ce",
         "type": "http request",
-        "z": "aaf60450.6229d8",
+        "z": "ed40b49a.4eee78",
         "name": "Call Node-RED Heroku",
         "method": "GET",
         "ret": "txt",
@@ -124,7 +165,7 @@
     {
         "id": "72489b47.2dc5a4",
         "type": "debug",
-        "z": "aaf60450.6229d8",
+        "z": "ed40b49a.4eee78",
         "name": "",
         "active": false,
         "console": "false",
@@ -136,7 +177,7 @@
     {
         "id": "18b193c9.4bae4c",
         "type": "delay",
-        "z": "aaf60450.6229d8",
+        "z": "ed40b49a.4eee78",
         "name": "Keep alive",
         "pauseType": "timed",
         "timeout": "5",
@@ -158,7 +199,7 @@
     {
         "id": "75585b3.9cc97a4",
         "type": "change",
-        "z": "aaf60450.6229d8",
+        "z": "ed40b49a.4eee78",
         "name": "Clear msg",
         "rules": [
             {
@@ -181,23 +222,5 @@
                 "2808a205.6667ce"
             ]
         ]
-    },
-    {
-        "id": "1183f03b.fae04",
-        "type": "mqtt-broker",
-        "z": "b2757629.9a08f8",
-        "broker": "m20.cloudmqtt.com",
-        "port": "15555",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": true,
-        "keepalive": "60",
-        "cleansession": true,
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": "",
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": ""
     }
 ]

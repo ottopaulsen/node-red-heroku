@@ -48,12 +48,12 @@
         "topic": "smoky/1/#",
         "qos": "1",
         "broker": "1183f03b.fae04",
-        "x": 146.5,
-        "y": 99,
+        "x": 150.5,
+        "y": 45,
         "wires": [
             [
-                "d56617a5.79e518",
-                "31caee29.3735e2"
+                "31caee29.3735e2",
+                "d56617a5.79e518"
             ]
         ]
     },
@@ -67,8 +67,8 @@
         "topic2": "smoky/1/inside/humidity",
         "topic3": "smoky/1/inside/heaterpercent",
         "topic4": "smoky/1/inside/smoke",
-        "topic5": "smoky/1/outside/temperature",
-        "topic6": "smoky/1/outside/humidity",
+        "topic5": "weather/outTemp_C",
+        "topic6": "weather/outHumidity",
         "topic7": "smoky/1/inside/heateroutput",
         "topic8": "smoky/1/dhtreadfailures",
         "endpoint": "https://thingspeak.com",
@@ -220,6 +220,22 @@
         "wires": [
             [
                 "2808a205.6667ce"
+            ]
+        ]
+    },
+    {
+        "id": "436dd270.785fec",
+        "type": "mqtt in",
+        "z": "ed40b49a.4eee78",
+        "name": "Outside temp",
+        "topic": "weather/+",
+        "qos": "1",
+        "broker": "d11b744b.bc4f38",
+        "x": 150.5,
+        "y": 113,
+        "wires": [
+            [
+                "d56617a5.79e518"
             ]
         ]
     }

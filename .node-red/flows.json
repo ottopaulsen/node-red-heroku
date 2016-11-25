@@ -5,6 +5,11 @@
         "label": "Flow 1"
     },
     {
+        "id": "e9b58ff4.30882",
+        "type": "tab",
+        "label": "Flow 2"
+    },
+    {
         "id": "1183f03b.fae04",
         "type": "mqtt-broker",
         "z": "b2757629.9a08f8",
@@ -41,19 +46,27 @@
         "birthPayload": ""
     },
     {
+        "id": "fc0216f3.ef0178",
+        "type": "firebase config",
+        "z": "ed40b49a.4eee78",
+        "firebaseurl": "smoky-c9f1b",
+        "loginType": "none"
+    },
+    {
         "id": "aa691bac.527198",
         "type": "mqtt in",
         "z": "ed40b49a.4eee78",
         "name": "Smoky data",
         "topic": "smoky/1/#",
         "qos": "1",
-        "broker": "1183f03b.fae04",
-        "x": 150.5,
-        "y": 45,
+        "broker": "d11b744b.bc4f38",
+        "x": 77.5,
+        "y": 87,
         "wires": [
             [
                 "31caee29.3735e2",
-                "d56617a5.79e518"
+                "d56617a5.79e518",
+                "d38fb242.2f96f"
             ]
         ]
     },
@@ -72,8 +85,8 @@
         "topic7": "smoky/1/inside/heateroutput",
         "topic8": "smoky/1/dhtreadfailures",
         "endpoint": "https://thingspeak.com",
-        "x": 506.5,
-        "y": 106,
+        "x": 502.5,
+        "y": 213,
         "wires": []
     },
     {
@@ -85,8 +98,8 @@
         "qos": "1",
         "retain": "",
         "broker": "d11b744b.bc4f38",
-        "x": 569.5,
-        "y": 193,
+        "x": 565.5,
+        "y": 300,
         "wires": []
     },
     {
@@ -97,8 +110,8 @@
         "topic": "smoky/1/inside/temperature",
         "qos": "1",
         "broker": "1183f03b.fae04",
-        "x": 143.5,
-        "y": 194,
+        "x": 139.5,
+        "y": 301,
         "wires": [
             [
                 "9a6c5dd8.47c67",
@@ -125,8 +138,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 343.5,
-        "y": 194,
+        "x": 339.5,
+        "y": 301,
         "wires": [
             [
                 "799bad78.ba3d64"
@@ -137,12 +150,12 @@
         "id": "31caee29.3735e2",
         "type": "debug",
         "z": "ed40b49a.4eee78",
-        "name": "",
+        "name": "Debug",
         "active": false,
         "console": "false",
-        "complete": "false",
-        "x": 451.5,
-        "y": 48,
+        "complete": "payload",
+        "x": 290.5,
+        "y": 33,
         "wires": []
     },
     {
@@ -154,8 +167,8 @@
         "ret": "txt",
         "url": "https://node-red-otto.herokuapp.com/",
         "tls": "",
-        "x": 610,
-        "y": 299,
+        "x": 606,
+        "y": 406,
         "wires": [
             [
                 "72489b47.2dc5a4"
@@ -170,8 +183,8 @@
         "active": false,
         "console": "false",
         "complete": "false",
-        "x": 652,
-        "y": 382,
+        "x": 639,
+        "y": 492,
         "wires": []
     },
     {
@@ -188,8 +201,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 173.5,
-        "y": 300,
+        "x": 169.5,
+        "y": 407,
         "wires": [
             [
                 "75585b3.9cc97a4"
@@ -215,8 +228,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 354,
-        "y": 298,
+        "x": 350,
+        "y": 405,
         "wires": [
             [
                 "2808a205.6667ce"
@@ -227,15 +240,102 @@
         "id": "436dd270.785fec",
         "type": "mqtt in",
         "z": "ed40b49a.4eee78",
-        "name": "Outside temp",
+        "name": "Weather station",
         "topic": "weather/+",
         "qos": "1",
         "broker": "d11b744b.bc4f38",
-        "x": 150.5,
-        "y": 113,
+        "x": 85,
+        "y": 162,
         "wires": [
             [
-                "d56617a5.79e518"
+                "d56617a5.79e518",
+                "f182cd7b.c965c"
+            ]
+        ]
+    },
+    {
+        "id": "ae2bb4ac.795308",
+        "type": "firebase modify",
+        "z": "ed40b49a.4eee78",
+        "name": "Firebase Save Latest",
+        "firebaseconfig": "fc0216f3.ef0178",
+        "childpath": "msg.childpath",
+        "method": "set",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 634.5,
+        "y": 145,
+        "wires": [
+            [
+                "285c4cc8.196464"
+            ]
+        ]
+    },
+    {
+        "id": "285c4cc8.196464",
+        "type": "debug",
+        "z": "ed40b49a.4eee78",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 675.5,
+        "y": 209,
+        "wires": []
+    },
+    {
+        "id": "d38fb242.2f96f",
+        "type": "change",
+        "z": "ed40b49a.4eee78",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "childpath",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 304.5,
+        "y": 79,
+        "wires": [
+            [
+                "f182cd7b.c965c"
+            ]
+        ]
+    },
+    {
+        "id": "2199632b.325bfc",
+        "type": "debug",
+        "z": "ed40b49a.4eee78",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 686.5,
+        "y": 29,
+        "wires": []
+    },
+    {
+        "id": "f182cd7b.c965c",
+        "type": "function",
+        "z": "ed40b49a.4eee78",
+        "name": "Build childpath",
+        "func": "msg.childpath = \"latest/\" + msg.topic\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 520.5,
+        "y": 99,
+        "wires": [
+            [
+                "ae2bb4ac.795308",
+                "2199632b.325bfc"
             ]
         ]
     }

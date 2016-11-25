@@ -1,7 +1,7 @@
 {
   "name": "Node-RED Heroku",
   "description": "Run Node-RED on Heroku",
-  "repository": "https://github.com/ottopaulsen/node-red-otto",
+  "repository": "https://github.com/ottopaulsen/node-red-heroku",
   "keywords": ["node", "smoky", "node-red"],
   "image": "heroku/nodejs"
 }

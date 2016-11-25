@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "node-red": "*",
+    "firebase": "*",
     "node-red-admin": "*",
-    "node-red-contrib-thingspeak42":"*"
+    "node-red-contrib-thingspeak42":"*",
+    "node-red-contrib-firebase": "*"
   },
   "repository": {
     "type": "git",

@@ -418,6 +418,66 @@
      "file": "/usr/local/lib/node_modules/node-red-contrib-thingspeak/thingspeak/thingspeak.js"
     }
    }
+  },
+  "node-red-contrib-firebase": {
+   "name": "node-red-contrib-firebase",
+   "version": "1.1.1",
+   "nodes": {
+    "firebase_config": {
+     "name": "firebase_config",
+     "types": [
+      "firebase config"
+     ],
+     "enabled": true,
+     "module": "node-red-contrib-firebase",
+     "file": "/usr/local/lib/node_modules/node-red-contrib-firebase/firebase/firebase_config.js"
+    },
+    "firebase_modify": {
+     "name": "firebase_modify",
+     "types": [
+      "firebase modify"
+     ],
+     "enabled": true,
+     "module": "node-red-contrib-firebase",
+     "file": "/usr/local/lib/node_modules/node-red-contrib-firebase/firebase/firebase_modify.js"
+    },
+    "firebase_once": {
+     "name": "firebase_once",
+     "types": [
+      "firebase.once"
+     ],
+     "enabled": true,
+     "module": "node-red-contrib-firebase",
+     "file": "/usr/local/lib/node_modules/node-red-contrib-firebase/firebase/firebase_once.js"
+    },
+    "firebase_on": {
+     "name": "firebase_on",
+     "types": [
+      "firebase.on"
+     ],
+     "enabled": true,
+     "module": "node-red-contrib-firebase",
+     "file": "/usr/local/lib/node_modules/node-red-contrib-firebase/firebase/firebase_on.js"
+    },
+    "firebase_ondisconnect": {
+     "name": "firebase_ondisconnect",
+     "types": [
+      "firebase ondisconnect"
+     ],
+     "enabled": true,
+     "module": "node-red-contrib-firebase",
+     "file": "/usr/local/lib/node_modules/node-red-contrib-firebase/firebase/firebase_ondisconnect.js"
+    },
+    "firebase_auth": {
+     "name": "firebase_auth",
+     "types": [
+      "firebase auth"
+     ],
+     "enabled": true,
+     "module": "node-red-contrib-firebase",
+     "file": "/usr/local/lib/node_modules/node-red-contrib-firebase/firebase/firebase_auth.js"
+    }
+   }
   }
  }
 }

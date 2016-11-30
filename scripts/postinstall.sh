@@ -11,7 +11,7 @@ cat > $FLOWS_CRED_FILE << EOF
         "apiKey": "${THINGSPEAK_API_KEY}"
     },
     "d11b744b.bc4f38": {
-        "user": "${MQTT_PASSWORD}",
+        "user": "${MQTT_USER}",
         "password": "${MQTT_PASSWORD}"
     }
 }

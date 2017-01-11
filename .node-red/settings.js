@@ -103,7 +103,7 @@ module.exports = {
         type: "credentials",
         users: [{
             username: "otto",
-            password:"$2a$08$hNARu.7iYt0pY8Dc5s.u9OVxtxT7d39ZfYyTMBlPOVemHm2NyUvJ2",
+            password:"$2a$08$6O82S90VvNf1M.fH88HV5Otvafjvb3d.uaLBUrOB4KLTPaRUlC0..",
             permissions: "*"
         }]
     },

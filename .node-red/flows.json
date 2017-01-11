@@ -1,56 +1,19 @@
 [
     {
-        "id": "ed40b49a.4eee78",
-        "type": "tab",
-        "label": "Flow 1"
-    },
-    {
-        "id": "e9b58ff4.30882",
-        "type": "tab",
-        "label": "Flow 2"
-    },
-    {
-        "id": "1183f03b.fae04",
-        "type": "mqtt-broker",
-        "z": "b2757629.9a08f8",
-        "broker": "m20.cloudmqtt.com",
-        "port": "15555",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": true,
-        "keepalive": "60",
-        "cleansession": true,
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": "",
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": ""
-    },
-    {
-        "id": "d11b744b.bc4f38",
-        "type": "mqtt-broker",
+        "id": "ae2bb4ac.795308",
+        "type": "firebase modify",
         "z": "ed40b49a.4eee78",
-        "broker": "m20.cloudmqtt.com",
-        "port": "15555",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": true,
-        "keepalive": "60",
-        "cleansession": true,
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": "",
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": ""
-    },
-    {
-        "id": "fc0216f3.ef0178",
-        "type": "firebase config",
-        "z": "ed40b49a.4eee78",
-        "firebaseurl": "smoky-c9f1b",
-        "loginType": "none"
+        "name": "Firebase Save Latest",
+        "firebaseconfig": "",
+        "childpath": "msg.childpath",
+        "method": "set",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 592.5,
+        "y": 241,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "aa691bac.527198",
@@ -60,13 +23,12 @@
         "topic": "smoky/1/#",
         "qos": "1",
         "broker": "d11b744b.bc4f38",
-        "x": 77.5,
-        "y": 87,
+        "x": 95.5,
+        "y": 188,
         "wires": [
             [
-                "31caee29.3735e2",
                 "d56617a5.79e518",
-                "d38fb242.2f96f"
+                "f182cd7b.c965c"
             ]
         ]
     },
@@ -74,7 +36,7 @@
         "id": "d56617a5.79e518",
         "type": "thingspeak42",
         "z": "ed40b49a.4eee78",
-        "name": "ThingSpeak",
+        "name": "ThingSpeak Smoky",
         "delay": "30",
         "topic1": "smoky/1/inside/temperature",
         "topic2": "smoky/1/inside/humidity",
@@ -85,21 +47,8 @@
         "topic7": "smoky/1/inside/heateroutput",
         "topic8": "smoky/1/dhtreadfailures",
         "endpoint": "https://thingspeak.com",
-        "x": 502.5,
-        "y": 213,
-        "wires": []
-    },
-    {
-        "id": "799bad78.ba3d64",
-        "type": "mqtt out",
-        "z": "ed40b49a.4eee78",
-        "name": "Smoky ack",
-        "topic": "smoky/1/in/ack",
-        "qos": "1",
-        "retain": "",
-        "broker": "d11b744b.bc4f38",
-        "x": 565.5,
-        "y": 300,
+        "x": 458.5,
+        "y": 314,
         "wires": []
     },
     {
@@ -110,8 +59,8 @@
         "topic": "smoky/1/inside/temperature",
         "qos": "1",
         "broker": "1183f03b.fae04",
-        "x": 139.5,
-        "y": 301,
+        "x": 111.5,
+        "y": 748,
         "wires": [
             [
                 "9a6c5dd8.47c67",
@@ -138,25 +87,13 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 339.5,
-        "y": 301,
+        "x": 311.5,
+        "y": 748,
         "wires": [
             [
-                "799bad78.ba3d64"
+                "b8c91a7.ba033e8"
             ]
         ]
-    },
-    {
-        "id": "31caee29.3735e2",
-        "type": "debug",
-        "z": "ed40b49a.4eee78",
-        "name": "Debug",
-        "active": false,
-        "console": "false",
-        "complete": "payload",
-        "x": 290.5,
-        "y": 33,
-        "wires": []
     },
     {
         "id": "2808a205.6667ce",
@@ -167,25 +104,11 @@
         "ret": "txt",
         "url": "https://node-red-otto.herokuapp.com/",
         "tls": "",
-        "x": 606,
-        "y": 406,
+        "x": 578,
+        "y": 853,
         "wires": [
-            [
-                "72489b47.2dc5a4"
-            ]
+            []
         ]
-    },
-    {
-        "id": "72489b47.2dc5a4",
-        "type": "debug",
-        "z": "ed40b49a.4eee78",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "false",
-        "x": 639,
-        "y": 492,
-        "wires": []
     },
     {
         "id": "18b193c9.4bae4c",
@@ -201,8 +124,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 169.5,
-        "y": 407,
+        "x": 141.5,
+        "y": 854,
         "wires": [
             [
                 "75585b3.9cc97a4"
@@ -228,8 +151,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 350,
-        "y": 405,
+        "x": 322,
+        "y": 852,
         "wires": [
             [
                 "2808a205.6667ce"
@@ -244,83 +167,14 @@
         "topic": "weather/+",
         "qos": "1",
         "broker": "d11b744b.bc4f38",
-        "x": 85,
-        "y": 162,
+        "x": 103,
+        "y": 245,
         "wires": [
             [
                 "d56617a5.79e518",
                 "f182cd7b.c965c"
             ]
         ]
-    },
-    {
-        "id": "ae2bb4ac.795308",
-        "type": "firebase modify",
-        "z": "ed40b49a.4eee78",
-        "name": "Firebase Save Latest",
-        "firebaseconfig": "fc0216f3.ef0178",
-        "childpath": "msg.childpath",
-        "method": "set",
-        "value": "msg.payload",
-        "priority": "msg.priority",
-        "x": 634.5,
-        "y": 145,
-        "wires": [
-            [
-                "285c4cc8.196464"
-            ]
-        ]
-    },
-    {
-        "id": "285c4cc8.196464",
-        "type": "debug",
-        "z": "ed40b49a.4eee78",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "true",
-        "x": 675.5,
-        "y": 209,
-        "wires": []
-    },
-    {
-        "id": "d38fb242.2f96f",
-        "type": "change",
-        "z": "ed40b49a.4eee78",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "childpath",
-                "pt": "msg",
-                "to": "topic",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 304.5,
-        "y": 79,
-        "wires": [
-            [
-                "f182cd7b.c965c"
-            ]
-        ]
-    },
-    {
-        "id": "2199632b.325bfc",
-        "type": "debug",
-        "z": "ed40b49a.4eee78",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "true",
-        "x": 686.5,
-        "y": 29,
-        "wires": []
     },
     {
         "id": "f182cd7b.c965c",
@@ -330,13 +184,242 @@
         "func": "msg.childpath = \"latest/\" + msg.topic\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 520.5,
-        "y": 99,
+        "x": 368.5,
+        "y": 217,
         "wires": [
             [
-                "ae2bb4ac.795308",
-                "2199632b.325bfc"
+                "ae2bb4ac.795308"
             ]
         ]
+    },
+    {
+        "id": "95ee839e.cf7e3",
+        "type": "debug",
+        "z": "ed40b49a.4eee78",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 352.5,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "42fc1e6a.6dff3",
+        "type": "mqtt in",
+        "z": "ed40b49a.4eee78",
+        "name": "Ballmer input",
+        "topic": "ballmerpeakdetector/bac",
+        "qos": "2",
+        "broker": "d11b744b.bc4f38",
+        "x": 99.5,
+        "y": 71,
+        "wires": [
+            [
+                "95ee839e.cf7e3",
+                "cb9c147.b4ef4e8",
+                "93958c4d.5c87"
+            ]
+        ]
+    },
+    {
+        "id": "cb9c147.b4ef4e8",
+        "type": "function",
+        "z": "ed40b49a.4eee78",
+        "name": "Determin peak",
+        "func": "\nif(msg.payload == 0){\n    msg.payload = \"\";\n} else if(msg.payload < 100){\n    msg.payload = \"Drink!\";\n} else if(msg.payload < 200) {\n    msg.payload = \"PEAK!\";\n} else {\n    msg.payload = \"Oh oh!\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 341.5,
+        "y": 124,
+        "wires": [
+            [
+                "f182cd7b.c965c"
+            ]
+        ]
+    },
+    {
+        "id": "93958c4d.5c87",
+        "type": "thingspeak42",
+        "z": "ed40b49a.4eee78",
+        "name": "ThingsPeak Ballmer",
+        "delay": "15",
+        "topic1": "ballmerpeakdetector/bac",
+        "topic2": "",
+        "topic3": "",
+        "topic4": "",
+        "topic5": "",
+        "topic6": "",
+        "topic7": "",
+        "topic8": "",
+        "endpoint": "https://thingspeak.com",
+        "x": 382.5,
+        "y": 26,
+        "wires": []
+    },
+    {
+        "id": "eddad531.604048",
+        "type": "mqtt in",
+        "z": "ed40b49a.4eee78",
+        "name": "Bamsebu",
+        "topic": "bamsebu/1/#",
+        "qos": "2",
+        "broker": "75dd7417.cd476c",
+        "x": 95.5,
+        "y": 423,
+        "wires": [
+            [
+                "50bc1d97.6eb464"
+            ]
+        ]
+    },
+    {
+        "id": "50bc1d97.6eb464",
+        "type": "debug",
+        "z": "ed40b49a.4eee78",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 328.5,
+        "y": 422,
+        "wires": []
+    },
+    {
+        "id": "d6e85da.8e645a",
+        "type": "inject",
+        "z": "ed40b49a.4eee78",
+        "name": "Inject alcohol",
+        "topic": "ballmerpeakdetector/bac",
+        "payload": "90",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 134.5,
+        "y": 658,
+        "wires": [
+            [
+                "b8c91a7.ba033e8"
+            ]
+        ]
+    },
+    {
+        "id": "b8c91a7.ba033e8",
+        "type": "mqtt out",
+        "z": "ed40b49a.4eee78",
+        "name": "MQTT 20",
+        "topic": "ballmerpeakdetector/bac",
+        "qos": "2",
+        "retain": "false",
+        "broker": "d11b744b.bc4f38",
+        "x": 501.5,
+        "y": 712,
+        "wires": []
+    },
+    {
+        "id": "7326b917.48ced8",
+        "type": "inject",
+        "z": "ed40b49a.4eee78",
+        "name": "Clear bamsebu",
+        "topic": "bamsebu/1/inside/pressure",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 142.5,
+        "y": 554,
+        "wires": [
+            [
+                "a963f4bf.9ff238"
+            ]
+        ]
+    },
+    {
+        "id": "8521afe.74c175",
+        "type": "inject",
+        "z": "ed40b49a.4eee78",
+        "name": "Clear alcohol",
+        "topic": "ballballmerpeakdetector/bacer",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 126.5,
+        "y": 622,
+        "wires": [
+            [
+                "b8c91a7.ba033e8"
+            ]
+        ]
+    },
+    {
+        "id": "a963f4bf.9ff238",
+        "type": "mqtt out",
+        "z": "ed40b49a.4eee78",
+        "name": "MQTT 13",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "75dd7417.cd476c",
+        "x": 346.5,
+        "y": 558,
+        "wires": []
+    },
+    {
+        "id": "d11b744b.bc4f38",
+        "type": "mqtt-broker",
+        "z": "ed40b49a.4eee78",
+        "broker": "m20.cloudmqtt.com",
+        "port": "15555",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "1183f03b.fae04",
+        "type": "mqtt-broker",
+        "z": "b2757629.9a08f8",
+        "broker": "m20.cloudmqtt.com",
+        "port": "15555",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "75dd7417.cd476c",
+        "type": "mqtt-broker",
+        "z": "ed40b49a.4eee78",
+        "broker": "m13.cloudmqtt.com",
+        "port": "16948",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
     }
 ]
